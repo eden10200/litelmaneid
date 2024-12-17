@@ -59,8 +59,8 @@ GCPコンソールから新しいプロジェクトを作成します。
 bash
 touch .env
 ```
-# 環境変数の例
-# APIキーなど機密情報
+## 環境変数の例
+## APIキーなど機密情報
 ```
 SECRET_KEY=your-secret-key
 DEBUG=True
