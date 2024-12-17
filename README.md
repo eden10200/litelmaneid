@@ -23,13 +23,13 @@
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/username/repository.git
+git clone https://github.com/eden10200/littel-moneid　repository
 
 # ディレクトリに移動
 cd repository
 
 # 仮想環境を作成してアクティブ化
-python -m venv venv
+py -3.10 -m venv .venv
 source venv/bin/activate   # Windowsの場合: venv\Scripts\activate
 
 # 依存関係をインストール
