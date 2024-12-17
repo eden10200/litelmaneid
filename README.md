@@ -30,7 +30,7 @@ cd repository
 
 # 仮想環境を作成してアクティブ化
 py -3.10 -m venv .venv
-source venv/bin/activate   # Windowsの場合: venv\Scripts\activate
+source venv/bin/activate   # Windowsの場合: .venv\Scripts\activate
 
 # 依存関係をインストール
 pip install -r requirements.txt
