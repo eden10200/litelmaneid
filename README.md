@@ -59,7 +59,7 @@ GCPコンソールから新しいプロジェクトを作成します。
 bash
 touch .env
 ```
-### APIキーなど機密情報
+#### APIキーなど機密情報
 ```
 SECRET_KEY=your-secret-key
 DEBUG=True
