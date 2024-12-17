@@ -60,10 +60,12 @@ bash
 touch .env
 ```
 # 環境変数の例
-# APIキーなど機密情報```
+# APIキーなど機密情報
+```
 SECRET_KEY=your-secret-key
 DEBUG=True
-GOOGLE_CLOUD_KEY=your-google-cloud-api-key```
+GOOGLE_CLOUD_KEY=your-google-cloud-api-key
+```
 2.さきにダウンロードした絶対パスを[GOOGLE_CLOUD_KEY]に記入します
 
 ## ライセンス
