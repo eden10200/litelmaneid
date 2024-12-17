@@ -65,7 +65,7 @@ SECRET_KEY=your-secret-key
 DEBUG=True
 GOOGLE_CLOUD_KEY=your-google-cloud-api-key
 ```
-2.さきにダウンロードした絶対パスを[GOOGLE_CLOUD_KEY]に記入します
+2.さきにダウンロードした絶対パスを**`GOOGLE_CLOUD_KEY`に記入します
 
 ## 実行方法
 ```
