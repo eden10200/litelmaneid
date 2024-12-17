@@ -38,7 +38,7 @@ pip install -r requirements.txt
 ## API-Keyの取得
 
 #1. Google Cloud Platform アカウントの作成
-![Google Cloud Platform](https://cloud.google.com/?hl=ja) にアクセスし、GCPアカウントを作成します。
+[Google Cloud Platform](https://cloud.google.com/?hl=ja) にアクセスし、GCPアカウントを作成します。
 
 #2. 新しいプロジェクトの作成
 GCPコンソールから新しいプロジェクトを作成します。
@@ -64,7 +64,7 @@ SECRET_KEY=your-secret-key
 DEBUG=True
 # APIキーなど機密情報
 GOOGLE_CLOUD_KEY=your-google-cloud-api-key
-2.さきにダウンロードした絶対パスを![GOOGLE_CLOUD_KEY]に記入します
+2.さきにダウンロードした絶対パスを[GOOGLE_CLOUD_KEY]に記入します
 
 ## ライセンス
 
