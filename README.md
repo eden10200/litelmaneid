@@ -55,9 +55,8 @@ GCPコンソールから新しいプロジェクトを作成します。
 ### **手順**
 
 1. プロジェクトのルートディレクトリに`.env`ファイルを作成します。
-```
-bash
-touch .env
+```bash
+touch .env #windowsはcopy nul .config
 ```
 #### APIキーなど機密情報
 ```
