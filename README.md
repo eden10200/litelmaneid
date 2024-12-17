@@ -23,7 +23,7 @@
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/eden10200/littel-moneid　repository
+git clone https://github.com/eden10200/littel-moneid.git　repository
 
 # ディレクトリに移動
 cd repository
