@@ -1,0 +1,31 @@
+# Python関連
+*.pyc
+__pycache__/
+db.sqlite3
+*.sqlite3
+
+# 環境ファイルや機密情報
+.env
+config.yaml
+
+# Djangoマイグレーションキャッシュ
+*/migrations/*
+
+# ログファイル
+*.log
+
+# 仮想環境
+venv/
+.env/
+env/
+
+# メディアと静的ファイル
+/static/
+*/staticfiles/
+media/
+
+# その他
+.DS_Store
+.idea/
+.vscode/
+accounts/cre/*.json
