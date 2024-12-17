@@ -59,6 +59,7 @@ GCPコンソールから新しいプロジェクトを作成します。
 touch .env #Windowsの場合:copy nul .env
 ```
 #### APIキーなど機密情報
+2.以下のコードを適切に変更し**`.env`に記述します。
 ```
 SECRET_KEY=your-secret-key
 DEBUG=True
