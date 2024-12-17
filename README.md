@@ -30,7 +30,7 @@ cd repository
 
 # 仮想環境を作成してアクティブ化
 py -3.10 -m venv .venv
-source venv/bin/activate   # Windowsの場合: venv\Scripts\activate
+source venv/bin/activate   # Windowsの場合: .venv\Scripts\activate
 
 # 依存関係をインストール
 pip install -r requirements.txt
@@ -56,19 +56,21 @@ GCPコンソールから新しいプロジェクトを作成します。
 
 1. プロジェクトのルートディレクトリに`.env`ファイルを作成します。
 ```bash
-touch .env #Windowsの場合:copy nul .config
+touch .env #Windowsの場合: copy nul .env
 ```
 #### APIキーなど機密情報
+2.以下のコードを適切に変更し**`.env`に記述します。
 ```
 SECRET_KEY=your-secret-key
 DEBUG=True
-GOOGLE_CLOUD_KEY=your-google-cloud-api-key
+GOOGLE_CLOUD_KEY_JSON_PATH=your-google-cloud-api-key-json-path
 ```
 2.さきにダウンロードした絶対パスを**`GOOGLE_CLOUD_KEY`に記入します
 
 ## 実行方法
 ```
-python manage.py addres(0.0.0.0):port(8000)
+python manage.py migrate
+python manage.py runserver addres(0.0.0.0):port(8000)
 ```
 ## ライセンス
 
