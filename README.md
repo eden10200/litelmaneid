@@ -29,7 +29,7 @@ git clone https://github.com/eden10200/littel-moneid.git repository
 cd repository
 
 # 仮想環境を作成してアクティブ化
-py -3.8 -m venv .venv
+py -3.10 -m venv .venv
 source venv/bin/activate   # Windowsの場合: venv\Scripts\activate
 
 # 依存関係をインストール
