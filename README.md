@@ -34,7 +34,9 @@ source venv/bin/activate   # Windowsの場合: venv\Scripts\activate
 
 # 依存関係をインストール
 pip install -r requirements.txt
-##API-Keyの取得
+```
+## API-Keyの取得
+```
 #1. Google Cloud Platform アカウントの作成
 ![Google Cloud Platform](https://cloud.google.com/?hl=ja) にアクセスし、GCPアカウントを作成します。
 
@@ -45,13 +47,14 @@ GCPコンソールから新しいプロジェクトを作成します。
 作成したプロジェクトでGoogle Cloud Vision APIを有効にします。
 #4. サービスアカウントキーの作成
 サービスアカウントを作成し、サービスアカウントキーをダウンロードします。
+```
 ## 環境変数の設定
 
 このプロジェクトでは、機密情報（APIキーやデータベースの接続情報）を管理するために **`.env` ファイル**を使用します。
 
 ### **手順**
-
-#1. プロジェクトのルートディレクトリに`.env`ファイルを作成します。
+```
+1. プロジェクトのルートディレクトリに`.env`ファイルを作成します。
 ```bash
 touch .env```
 # 環境変数の例
@@ -59,8 +62,8 @@ SECRET_KEY=your-secret-key
 DEBUG=True
 # APIキーなど機密情報
 GOOGLE_CLOUD_KEY=your-google-cloud-api-key
-#2.さきにダウンロードした絶対パスを![GOOGLE_CLOUD_KEY]に記入します
-
+2.さきにダウンロードした絶対パスを![GOOGLE_CLOUD_KEY]に記入します
+```
 ## ライセンス
 
 このプロジェクトはMITライセンスのもとで公開されています。
