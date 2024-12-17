@@ -55,8 +55,10 @@ GCPコンソールから新しいプロジェクトを作成します。
 ### **手順**
 ```
 1. プロジェクトのルートディレクトリに`.env`ファイルを作成します。
-```bash
-touch .env```
+~~~
+bash
+touch .env
+~~~
 # 環境変数の例
 SECRET_KEY=your-secret-key
 DEBUG=True
