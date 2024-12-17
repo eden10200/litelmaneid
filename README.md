@@ -63,7 +63,7 @@ touch .env #Windowsの場合:copy nul .env
 ```
 SECRET_KEY=your-secret-key
 DEBUG=True
-GOOGLE_CLOUD_KEY=your-google-cloud-api-key
+GOOGLE_CLOUD_KEY_JSON_PATH=your-google-cloud-api-key-json-path
 ```
 2.さきにダウンロードした絶対パスを**`GOOGLE_CLOUD_KEY`に記入します
 
