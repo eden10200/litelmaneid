@@ -119,7 +119,7 @@ class AddTransaction(LoginRequiredMixin, generic.CreateView):
                         f.write(chunk)
                                         
                 load_dotenv()
-                API_KEY_PATH = os.getenv("API_KEY_PATH")
+                API_KEY_PATH = os.getenv("API_KEY_JSON_PATH")
                 # OCR処理（Google APIなど）
                 ocr_client = ReceiptOcrClient(credentials_path=API_KEY_PATH)
                 payment_info = ocr_client.get_payment_info(file_name=temp_path)
