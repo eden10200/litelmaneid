@@ -59,7 +59,6 @@ GCPコンソールから新しいプロジェクトを作成します。
 bash
 touch .env
 ```
-## 環境変数の例
 ## APIキーなど機密情報
 ```
 SECRET_KEY=your-secret-key
@@ -67,7 +66,8 @@ DEBUG=True
 GOOGLE_CLOUD_KEY=your-google-cloud-api-key
 ```
 2.さきにダウンロードした絶対パスを[GOOGLE_CLOUD_KEY]に記入します
-##実行方法
+
+## 実行方法
 ```
 python manage.py addres(0.0.0.0):port(8000)
 ```
