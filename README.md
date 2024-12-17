@@ -69,7 +69,7 @@ GOOGLE_CLOUD_KEY_JSON_PATH=your-google-cloud-api-key-json-path
 
 ## 実行方法
 ```
-python manage.py addres(0.0.0.0):port(8000)
+python manage.py runserver addres(0.0.0.0):port(8000)
 ```
 ## ライセンス
 
