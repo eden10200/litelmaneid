@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+<!-- コンテンツ -->
+{% block content %}
+<div class="container">
+   <h1>{{ user.username }}さんのお財布事情</h1>
+
+     <!-- 日付範囲フィルタフォーム -->
+        <form method="get" class="form-inline">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="start_date">開始日:</label>
+                {{ form.start_date }}
+            </div>
+            <div class="form-group">
+                <label for="end_date">終了日:</label>
+                {{ form.end_date }}
+            </div>
+            <button type="submit" class="btn btn-primary">フィルタ</button>
+        </form>
+    <!--<p>収入合計: {{ total_income }}</p>-->
+    <p>支出合計: {{ total_expense }}円</p>
+    <!--<p>バランス: {{ balance }}</p>-->
+    <table class="table table-bordered">
+        <tr>
+            <th>日付</th>
+            <th>店名</th>
+            <th>金額</th>
+
+        </tr>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction.date }}</td>
+            <td>{{ transaction.store_name }}</td>
+            <td>{{ transaction.amount }}円</td>
+        </tr>
+        {% endfor %}
+    </table>
+ <a  class="btn btn-primary rounded-circle" href="{% url 'accounts:add_transaction' user.pk %}">＋</a>
+</div >
+
+{% endblock %}

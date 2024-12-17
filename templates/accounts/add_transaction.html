@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出費を追加</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="col-md-6 offset-md-3">
+        <div class="col"><h4>■出費を追加</h4></div>
+        <div class="card mt-3 mb-3 bg-light">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <h2>レシート画像をアップロード</h2>
+                <label for="receipt-image">レシート画像:</label>
+                <input type="file" id="receipt-image" name="receipt_image">
+
+                <!-- 画像アップロードボタン -->
+                <button type="submit" name="action" value="analyze">解析を実行</button>
+
+                <h3>手動で入力する場合</h3>
+                {{ form.as_p }}  <!-- 手入力フォームフィールド -->
+                <input type="hidden" name="user" value="{{ request.user.pk }}">                <!-- 保存ボタン -->
+                <button type="submit" name="action" value="save">保存</button>
+            </form>
+
+            {% if form.errors %}
+            <div class="error-summary">
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                    <li>{{ field }}: {{ errors }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+{% endblock %}

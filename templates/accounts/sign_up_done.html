@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+<!-- コンテンツ -->
+{% block content %}
+<div class="container">
+  <div class="col-md-6 offset-md-3">
+    <div class="card mt-3 mb-3 bg-light">
+      <!-- カードヘッダー -->
+      <div class="card-header bg-success text-light">
+        <h4>Sign up Done</h4>
+      </div>
+      <!-- カードボディー -->
+      <div class="card-body">
+        <p>ユーザー登録が完了しました。ログインページへお進みください。</p>
+        <p class="text-danger">"ユーザー名"と"パスワード"は大切に管理してください。</p>
+        <hr>
+        <a href="{% url 'accounts:login' %}">Log in</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
