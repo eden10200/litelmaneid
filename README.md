@@ -67,7 +67,10 @@ DEBUG=True
 GOOGLE_CLOUD_KEY=your-google-cloud-api-key
 ```
 2.さきにダウンロードした絶対パスを[GOOGLE_CLOUD_KEY]に記入します
-
+##実行方法
+```
+python manage.py addres(0.0.0.0):port(8000)
+```
 ## ライセンス
 
 このプロジェクトはMITライセンスのもとで公開されています。
