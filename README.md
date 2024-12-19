@@ -69,8 +69,8 @@ GOOGLE_CLOUD_KEY_JSON_PATH=your-google-cloud-api-key-json-path
 
 ## 実行方法
 ```
-python manage.py migrations accounts
-python manage.py migrations accounts
+python manage.py migrations 
+#アカウントのテーブルが見つからない場合に実行  python manage.py migrations accounts
 python manage.py migrate
 python manage.py runserver addres(0.0.0.0):port(8000)
 ```
