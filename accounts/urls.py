@@ -15,5 +15,7 @@ urlpatterns = [
     path('password_change_done/', views.PasswordChangeDone.as_view(), name='password_change_done'),  # パスワード変更完了
     path('money_manage/<int:pk>/', views.MoneyManage.as_view(), name='money_manage'),  #
     path('add_transaction/<int:pk>/', views.AddTransaction.as_view(), name='add_transaction'),
+    path('transaction/delete/<int:pk>/', views.delete_transaction, name='delete_transaction'),
+    path('transaction/edit/<int:pk>/', views.edit_transaction, name='edit_transaction'),
 
 ]

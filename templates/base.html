@@ -38,12 +38,13 @@
                     <a class="nav-link" href="{% url 'accounts:signup' %}">Sign up</a>
                 </li>
             {% else %}
+             <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:money_manage' user.pk %}">Money Manage</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'accounts:my_page' user.pk %}">My page</a>
                 </li>
-                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:money_manage' user.pk %}">Money Manage</a>
-                </li>
+
                 <li class="nav-item">
                     <!-- accounts/logout.html -->
                     <form method="post" action="{% url 'accounts:logout' %}">
@@ -77,6 +78,13 @@
     {% endif %}
 </div>
 <!-- コンテンツ -->
+{% if messages %}
+    <div class="alert alert-info">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
 {% block content %}{% endblock %}
 
 <!-- Optional JavaScript -->

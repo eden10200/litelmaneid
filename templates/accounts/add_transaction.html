@@ -24,7 +24,9 @@
                 <h3>手動で入力する場合</h3>
                 {{ form.as_p }}  <!-- 手入力フォームフィールド -->
                 <input type="hidden" name="user" value="{{ request.user.pk }}">                <!-- 保存ボタン -->
-                <button type="submit" name="action" value="save">保存</button>
+                <button type="submit" class="btn btn-primary" name="action" value="save">保存</button><br>
+
+                <a href="{% url 'accounts:money_manage' pk=request.user.pk %}" class="btn btn-secondary mt-3">戻る</a>
             </form>
 
             {% if form.errors %}

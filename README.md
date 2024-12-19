@@ -14,8 +14,8 @@
 
 このプロジェクトを動かすために必要なものをリストします。
 
-- Python 3.8
-- Django 4.2.16
+- Python 3.10
+- Django 5.1.3
 - 依存ライブラリ
 
 ## インストール方法
@@ -23,14 +23,14 @@
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/username/repository.git
+git clone https://github.com/eden10200/littel-moneid.git repository
 
 # ディレクトリに移動
 cd repository
 
 # 仮想環境を作成してアクティブ化
-python -m venv venv
-source venv/bin/activate   # Windowsの場合: venv\Scripts\activate
+py -3.10 -m venv .venv
+source venv/bin/activate   # Windowsの場合: .venv\Scripts\activate
 
 # 依存関係をインストール
 pip install -r requirements.txt
@@ -55,17 +55,25 @@ GCPコンソールから新しいプロジェクトを作成します。
 ### **手順**
 
 1. プロジェクトのルートディレクトリに`.env`ファイルを作成します。
+```bash
+touch .env #Windowsの場合: copy nul .env
 ```
-bash
-touch .env
+#### APIキーなど機密情報
+2.以下のコードを適切に変更し**`.env`に記述します。
 ```
-# 環境変数の例
 SECRET_KEY=your-secret-key
 DEBUG=True
-# APIキーなど機密情報
-GOOGLE_CLOUD_KEY=your-google-cloud-api-key
-2.さきにダウンロードした絶対パスを[GOOGLE_CLOUD_KEY]に記入します
+GOOGLE_CLOUD_KEY_JSON_PATH=your-google-cloud-api-key-json-path
+```
+2.さきにダウンロードした絶対パスを**`GOOGLE_CLOUD_KEY`に記入します
 
+## 実行方法
+```
+python manage.py migrations 
+#アカウントのテーブルが見つからない場合に実行  python manage.py migrations accounts
+python manage.py migrate
+python manage.py runserver addres(0.0.0.0):port(8000)
+```
 ## ライセンス
 
 このプロジェクトはMITライセンスのもとで公開されています。

@@ -14,6 +14,8 @@ from django.views import generic
 from django.urls import reverse_lazy
 from .forms import TransactionForm
 from .receipt_ocr_client import ReceiptOcrClient
+from django.shortcuts import get_object_or_404
+from django.contrib import messages
 import os
 from dotenv import load_dotenv
 '''トップページ'''
@@ -80,15 +82,44 @@ class MoneyManage(OnlyYouMixin, generic.DetailView):
         total_expense = transactions.aggregate(total=Sum('amount'))['total'] or 0
 
         # コンテキストに追加
+        context['date']=start_date
+        context['date_e']=end_date
         context['transactions'] = transactions
 
         context['total_expense'] = total_expense
 
         return context
 
+def delete_transaction(request, pk):
+    # ユーザーの取引を取得
+    transaction = get_object_or_404(Transaction, pk=pk, user=request.user)
+
+    # 取引を削除
+    transaction.delete()
+
+    # 削除後、メッセージを表示してリダイレクト
+    messages.success(request, '取引が削除されました。')
+    return redirect('accounts:money_manage', pk=request.user.pk)
+
+
 
 '''サインアップ'''
+def edit_transaction(request, pk):
+    # 取引を取得
+    transaction = get_object_or_404(Transaction, pk=pk, user=request.user)
 
+    if request.method == 'POST':
+        form = TransactionForm(request.POST, instance=transaction)
+        if form.is_valid():
+            form.save()  # 変更を保存
+            messages.success(request, '取引が更新されました。')
+            return redirect('accounts:money_manage', pk=request.user.pk)
+        else:
+            messages.error(request, 'フォームにエラーがあります。')
+    else:
+        form = TransactionForm(instance=transaction)
+
+    return render(request, 'accounts/edit_transaction.html', {'form': form, 'transaction': transaction})
 
 class AddTransaction(LoginRequiredMixin, generic.CreateView):
     template_name = 'accounts/add_transaction.html'
@@ -104,51 +135,62 @@ class AddTransaction(LoginRequiredMixin, generic.CreateView):
 
     def post(self, request, *args, **kwargs):
         action = request.POST.get("action")
-        print(f"Action received: {action}")  # Actionをデバッグ
+        print(f"Action received: {action}")  # デバッグ用
 
         if action == "analyze":
-            # 解析ボタンが押された場合
+            # レシート解析処理
             uploaded_file = request.FILES.get('receipt_image')
+            if not uploaded_file:
+                form = self.form_class(request.POST)
+                return render(request, self.template_name, {'form': form, 'error': 'レシート画像をアップロードしてください。'})
+
+            # 一時ファイルの作成とOCR処理
             temp_dir = 'temp'
-            if not os.path.exists(temp_dir):
-                os.makedirs(temp_dir)  # tempディレクトリを作成
-            if uploaded_file:
-                temp_path = os.path.join(temp_dir, uploaded_file.name)
+            os.makedirs(temp_dir, exist_ok=True)
+            temp_path = os.path.join(temp_dir, uploaded_file.name)
+
+            try:
                 with open(temp_path, 'wb') as f:
                     for chunk in uploaded_file.chunks():
                         f.write(chunk)
-                                        
-                load_dotenv()
-                API_KEY_PATH = os.getenv("GOOGLE_CLOUD_KEY_JSON_PATH")
-                # OCR処理（Google APIなど）
-                ocr_client = ReceiptOcrClient(credentials_path=API_KEY_PATH)
-                payment_info = ocr_client.get_payment_info(file_name=temp_path)
-                os.remove(temp_path)
-                print(payment_info.get('date', ''))
-                print(payment_info.get('amount',  ''))
-                # OCR結果をフォームに反映（ocr_mode=Trueで必須項目を無効化）
-                form = TransactionForm(request.POST, initial={
-                    'date': payment_info.get('date', ''),
-                    'amount': payment_info.get('amount', ''),
 
-                }, ocr_mode=True)
-            else:
-                form = TransactionForm(request.POST)
+                # OCR処理
+                
+
+                load_dotenv()
+                GOOGLE_CLOUD_KEY_JSON_PATH = os.getenv("GOOGLE_CLOUD_KEY_JSON_PATH")
+                ocr_client = ReceiptOcrClient(
+                    credentials_path=GOOGLE_CLOUD_KEY_JSON_PATH
+                )
+                payment_info = ocr_client.get_payment_info(file_name=temp_path)
+                print(f"OCR Results: {payment_info}")  # デバッグ用
+
+                # フォームを初期化（OCR結果を設定）
+                form = self.form_class(
+                    initial={
+                        'date': payment_info.get('date', ''),
+                        'amount': payment_info.get('amount', ''),
+                    },
+                    ocr_mode=True
+                )
+            finally:
+                # 一時ファイルの削除
+                if os.path.exists(temp_path):
+                    os.remove(temp_path)
 
         elif action == "save":
-            # 保存ボタンが押された場合
-            form = TransactionForm(request.POST)
-            # 必須項目を送信時に設定
-            form.fields['date'].required = True
-            form.fields['amount'].required = True
-
+            # 保存処理
+            form = self.form_class(request.POST)
             if form.is_valid():
                 form.save()
                 return redirect(self.get_success_url())
+        else:
+            form = self.form_class(request.POST)
 
-        # フォームが無効な場合、エラー内容をデバッグ
+        # エラー時のデバッグ
         print("Form errors:", form.errors)
         return render(request, self.template_name, {'form': form})
+
 class Signup(generic.CreateView):
     template_name = 'accounts/user_form.html'
     form_class = SignupForm

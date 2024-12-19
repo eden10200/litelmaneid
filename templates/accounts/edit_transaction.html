@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-6 offset-md-3">
+        <div class="col"><h4>■出費を追加</h4></div>
+        <div class="card mt-3 mb-3 bg-light">
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_date">日付:</label>
+                    {{ form.date }}
+                </div>
+                <div class="form-group">
+                    <label for="id_store_name">店名:</label>
+                    {{ form.store_name }}
+                </div>
+                <div class="form-group">
+                    <label for="id_amount">金額:</label>
+                    {{ form.amount }}
+                </div>
+                <input type="hidden" name="user" value="{{ request.user.pk }}">
+                <button type="submit" class="btn btn-primary">更新</button>
+            </form>
+        </div>
+        <a href="{% url 'accounts:money_manage' pk=request.user.pk %}" class="btn btn-secondary mt-3">戻る</a>
+    </div>
+</div>
+
+</div>
+{% endblock %}
